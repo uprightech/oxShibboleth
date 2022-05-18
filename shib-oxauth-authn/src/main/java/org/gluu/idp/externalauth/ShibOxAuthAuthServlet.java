@@ -300,8 +300,12 @@ public class ShibOxAuthAuthServlet extends HttpServlet {
             
             try {
                 ProfileRequestContext profileRequestContext = ExternalAuthentication.getProfileRequestContext(convId, request);
-                AuthnRequest authnRequest = (AuthnRequest) profileRequestContext.getInboundMessageContext().getMessage();
-                if (authnRequest != null) {
+
+                
+                if (profileRequestContext!=null && profileRequestContext.getInboundMessageContext()!=null && 
+                    profileRequestContext.getInboundMessageContext().getMessage() != null) {
+                    
+                    AuthnRequest authnRequest = (AuthnRequest) profileRequestContext.getInboundMessageContext().getMessage();
                     RequestedAuthnContext authnContext = authnRequest.getRequestedAuthnContext();
                     Issuer issuer = authnRequest.getIssuer();
                     if (issuer != null) {
